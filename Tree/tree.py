@@ -53,6 +53,22 @@ def bfs(q, target):
 	else:
 		return None
 
+def dfs(q, target):
+	if len(q) > 0:
+		current_list = q.popleft()
+		path = copy.copy(current_list[1])
+		current = current_list[0]
+		path.append(current)
+		if current.val == target:
+			return path
+		if current.right:
+			q.appendleft([current.right, path])
+		if current.left:
+			q.appendleft([current.left, path])
+		return dfs(q, target)
+	else:
+		return None
+
 def main():
 	array = [1,2,3,4,5,6,7,8]
 	root = buildTree(array)
@@ -60,6 +76,10 @@ def main():
 	q.append([root,[]])
 	target = 8
 	print bfs(q, target)
+	q = collections.deque()
+	q.append([root,[]])
+	target = 8
+	print dfs(q, target)
 
 if __name__ == "__main__":
 	main()
