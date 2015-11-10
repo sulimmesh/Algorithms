@@ -21,9 +21,30 @@ def reverse_rec(string):
 	start = string[len(string)-1]
 	return start+str(reverse_rec(string[1:len(string)-1]))+end
 
+def is_anagram_iter(string):
+	start = 0
+	end = len(string)-1
+	while end > start:
+		if string[start] != string[end]:
+			return False
+		start += 1
+		end -= 1
+	return True
+
+def is_anagram_rec(string):
+	if len(string) < 1:
+		return True
+	if string[0] != string[len(string)-1]:
+		return False
+	return is_anagram_rec(string[1:-1])
 
 if __name__ == "__main__":
 	string = "string"
+	print string
 	print reverse_iter(string)
 	string = list(string)
 	print reverse_rec(string)
+	print is_anagram_iter(string)
+	print is_anagram_iter("abba")
+	print is_anagram_rec(string)
+	print is_anagram_rec("abba")
